@@ -35,6 +35,10 @@ function processModule(chunk, ourModule) {
 }
 
 function addAssets(chunk, module) {
+    if (!module.buildInfo || !module.buildInfo.assets) {
+        return;
+    }
+    
     // add any emitted assets via proxied module to this chunk
     for (const file of Object.keys(module.buildInfo.assets)) {
         chunk.files.push(file);
